@@ -3,6 +3,7 @@ package com.example.btctracker
 import android.os.Bundle
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import com.example.btctracker.data.Storage
 
 class SettingsActivity : AppCompatActivity() {
 
@@ -16,7 +17,7 @@ class SettingsActivity : AppCompatActivity() {
         layout.orientation = LinearLayout.VERTICAL
 
         val key = EditText(this)
-        key.hint = "Binance API Key"
+        key.hint = "Binance Key"
         key.setText(storage.getBinanceKey())
 
         val secret = EditText(this)
@@ -28,7 +29,7 @@ class SettingsActivity : AppCompatActivity() {
         addresses.setText(storage.getAddresses())
 
         val fake = EditText(this)
-        fake.hint = "Fake BTC price USD"
+        fake.hint = "Fake BTC price"
         fake.setText(storage.getFakePrice())
 
         val save = Button(this)
