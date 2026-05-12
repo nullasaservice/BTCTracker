@@ -9,41 +9,66 @@
         android:layout_gravity="center">
 
         <LinearLayout
-            android:layout_width="300dp"
+            android:layout_width="320dp"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="center_horizontal">
+            android:orientation="vertical">
+
+            <!-- BINANCE KEY -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Binance API Key"/>
 
             <EditText
                 android:id="@+id/etBinanceKey"
                 android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <!-- BINANCE SECRET -->
+            <TextView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="Binance API Key"/>
+                android:text="Binance Secret"/>
 
             <EditText
                 android:id="@+id/etBinanceSecret"
                 android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <!-- ADDRESSES -->
+            <TextView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="Binance Secret"/>
+                android:text="BTC Wallet Addresses"/>
 
             <EditText
                 android:id="@+id/etAddresses"
                 android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <!-- FAKE PRICE -->
+            <TextView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="BTC addresses"/>
+                android:text="Fake BTC Price (USD)"/>
 
             <EditText
                 android:id="@+id/etFakePrice"
                 android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <!-- COINGECKO -->
+            <TextView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="Fake BTC price (USD)"/>
+                android:text="CoinGecko API Key"/>
 
             <EditText
                 android:id="@+id/etCgKey"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="CoinGecko API Key"/>
+                android:layout_height="wrap_content"/>
 
+            <!-- SAVE BUTTON -->
             <Button
                 android:id="@+id/btnSave"
                 android:layout_width="match_parent"
