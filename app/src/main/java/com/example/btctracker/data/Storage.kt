@@ -19,6 +19,12 @@ class Storage(context: Context) {
     fun setFakePrice(v: String) =
         prefs.edit().putString("fake", v).apply()
 
+    fun setCoinGeckoApiKey(v: String) =
+        prefs.edit().putString("cg_key", v).apply()
+
+    fun getCoinGeckoApiKey() =
+        prefs.getString("cg_key", "") ?: ""
+
     fun getBinanceKey() =
         prefs.getString("key", "") ?: ""
 
@@ -31,6 +37,6 @@ class Storage(context: Context) {
     fun getFakePrice() =
         prefs.getString("fake", "") ?: ""
 
-    fun isConfigured(): Boolean =
-        getAddresses().isNotBlank()
+    fun isConfigured(): Boolean = getAddresses().isNotBlank()
+            || (getBinanceKey().isNotBlank() && getBinanceSecret().isNotBlank())
 }

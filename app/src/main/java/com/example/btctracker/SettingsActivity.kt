@@ -32,6 +32,10 @@ class SettingsActivity : AppCompatActivity() {
         fake.hint = "Fake BTC price"
         fake.setText(storage.getFakePrice())
 
+        val cgKey = EditText(this)
+        cgKey.hint = "CoinGecko API Key"
+        cgKey.setText(storage.getCoinGeckoApiKey())
+
         val save = Button(this)
         save.text = "Save"
 
@@ -41,6 +45,7 @@ class SettingsActivity : AppCompatActivity() {
             storage.setBinanceSecret(secret.text.toString())
             storage.setAddresses(addresses.text.toString())
             storage.setFakePrice(fake.text.toString())
+            storage.setCoinGeckoApiKey(cgKey.text.toString())
 
             finish()
         }
@@ -49,6 +54,7 @@ class SettingsActivity : AppCompatActivity() {
         layout.addView(secret)
         layout.addView(addresses)
         layout.addView(fake)
+        layout.addView(cgKey)
         layout.addView(save)
 
         setContentView(layout)

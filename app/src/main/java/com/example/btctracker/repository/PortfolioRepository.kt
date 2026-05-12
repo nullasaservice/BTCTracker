@@ -9,16 +9,26 @@ class PortfolioRepository(private val storage: Storage) {
 
         val fake = storage.getFakePrice()
 
-        val (usd, eur) =
+        val priceData =
             if (fake.isNotBlank()) {
 
-                val p = fake.toDouble()
+                val fakeUsd = fake.toDouble()
 
-                Pair(p, p * FxApi.getUsdToEur())
+                val realPrices =
+                    PriceApi.fetchBTCPrice(storage.getCoinGeckoApiKey())
+
+                PriceData(
+                    btcUsd = fakeUsd,
+                    btcEur = fakeUsd * realPrices.usdToEur,
+                    usdToEur = realPrices.usdToEur
+                )
 
             } else {
-                PriceApi.fetchBTCPrice()
+                PriceApi.fetchBTCPrice(storage.getCoinGeckoApiKey())
             }
+
+        val usd = priceData.btcUsd
+        val eur = priceData.btcEur
 
         val addresses = storage.getAddresses()
             .split(",")
@@ -54,7 +64,7 @@ class PortfolioRepository(private val storage: Storage) {
 
         sb.append("TOTAL: $total BTC\n")
         sb.append("USD: ${total * usd}\n")
-        sb.append("EUR: ${total * usd * FxApi.getUsdToEur()}\n")
+        sb.append("EUR: ${total * eur}\n")
 
         return sb.toString()
     }

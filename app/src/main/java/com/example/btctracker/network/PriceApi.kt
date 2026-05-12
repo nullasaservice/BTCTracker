@@ -3,40 +3,48 @@ package com.example.btctracker.network
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import org.json.JSONObject
-import java.net.URL
+
+data class PriceData(
+    val btcUsd: Double,
+    val btcEur: Double,
+    val usdToEur: Double
+)
 
 object PriceApi {
 
-    suspend fun fetchBTCPrice(): Pair<Double, Double> {
+    suspend fun fetchBTCPrice(apiKey: String): PriceData {
 
         return withContext(Dispatchers.IO) {
 
             val url =
-                "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd"
+                "https://api.coingecko.com/api/v3/simple/price" +
+                        "?vs_currencies=usd,eur&ids=bitcoin"
 
-            try {
+            val response = HttpClient.get(
+                url,
+                mapOf(
+                    "x-cg-demo-api-key" to apiKey
+                )
+            )
 
-                val connection = URL(url).openConnection()
+            val json = JSONObject(response)
 
-                connection.connectTimeout = 10_000
-                connection.readTimeout = 10_000
+            val btc =
+                json.getJSONObject("bitcoin")
 
-                val response = HttpClient.get(url)
+            val usd =
+                btc.getDouble("usd")
 
-                val json = JSONObject(response)
+            val eur =
+                btc.getDouble("eur")
 
-                val usd =
-                    json.getJSONObject("bitcoin")
-                        .getDouble("usd")
+            val usdToEur = eur / usd
 
-                Pair(usd, usd * FxApi.getUsdToEur())
-
-            } catch (e: Exception) {
-
-                e.printStackTrace()
-
-                throw RuntimeException("CoinGecko fetch failed: ${e.message}")
-            }
+            PriceData(
+                btcUsd = usd,
+                btcEur = eur,
+                usdToEur = usdToEur
+            )
         }
     }
 }
