@@ -1,0 +1,57 @@
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center">
+
+        <LinearLayout
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_horizontal">
+
+            <EditText
+                android:id="@+id/etBinanceKey"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Binance API Key"/>
+
+            <EditText
+                android:id="@+id/etBinanceSecret"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Binance Secret"/>
+
+            <EditText
+                android:id="@+id/etAddresses"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="BTC addresses"/>
+
+            <EditText
+                android:id="@+id/etFakePrice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Fake BTC price (USD)"/>
+
+            <EditText
+                android:id="@+id/etCgKey"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="CoinGecko API Key"/>
+
+            <Button
+                android:id="@+id/btnSave"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Save"/>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</FrameLayout>

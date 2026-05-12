@@ -2,8 +2,7 @@ package com.example.btctracker
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
+import android.widget.ImageButton
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.btctracker.data.Storage
@@ -20,25 +19,32 @@ class MainActivity : AppCompatActivity() {
 
         super.onCreate(savedInstanceState)
 
-        text = TextView(this)
+        setContentView(R.layout.activity_main)
 
-        setContentView(text)
+        val refresh = findViewById<ImageButton>(R.id.btnRefresh)
+        val settings = findViewById<ImageButton>(R.id.btnSettings)
+        text = findViewById(R.id.txtOutput)
 
         storage = Storage(this)
         repo = PortfolioRepository(storage)
 
-        if (!storage.isConfigured()) {
+        refresh.setOnClickListener {
+            load()
+        }
 
+        settings.setOnClickListener {
             startActivity(
                 Intent(this, SettingsActivity::class.java)
             )
-
-            text.text = "Open settings to configure"
-
-            return
         }
 
-        load()
+        if (!storage.isConfigured()) {
+            startActivity(
+                Intent(this, SettingsActivity::class.java)
+            )
+        } else {
+            load()
+        }
     }
 
     override fun onResume() {
@@ -55,34 +61,6 @@ class MainActivity : AppCompatActivity() {
             } catch (e: Exception) {
                 text.text = e.toString()
             }
-        }
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-
-        menu.add(0, 1, 0, "Refresh")
-        menu.add(0, 2, 1, "Settings")
-
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-
-        return when (item.itemId) {
-
-            1 -> {
-                load()
-                true
-            }
-
-            2 -> {
-                startActivity(
-                    Intent(this, SettingsActivity::class.java)
-                )
-                true
-            }
-
-            else -> super.onOptionsItemSelected(item)
         }
     }
 }

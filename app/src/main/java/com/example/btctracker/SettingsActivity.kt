@@ -11,33 +11,23 @@ class SettingsActivity : AppCompatActivity() {
 
         super.onCreate(savedInstanceState)
 
+        setContentView(R.layout.activity_settings)
+
         val storage = Storage(this)
 
-        val layout = LinearLayout(this)
-        layout.orientation = LinearLayout.VERTICAL
+        val key = findViewById<EditText>(R.id.etBinanceKey)
+        val secret = findViewById<EditText>(R.id.etBinanceSecret)
+        val addresses = findViewById<EditText>(R.id.etAddresses)
+        val fake = findViewById<EditText>(R.id.etFakePrice)
+        val cg = findViewById<EditText>(R.id.etCgKey)
 
-        val key = EditText(this)
-        key.hint = "Binance Key"
+        val save = findViewById<Button>(R.id.btnSave)
+
         key.setText(storage.getBinanceKey())
-
-        val secret = EditText(this)
-        secret.hint = "Binance Secret"
         secret.setText(storage.getBinanceSecret())
-
-        val addresses = EditText(this)
-        addresses.hint = "BTC addresses comma separated"
         addresses.setText(storage.getAddresses())
-
-        val fake = EditText(this)
-        fake.hint = "Fake BTC price"
         fake.setText(storage.getFakePrice())
-
-        val cgKey = EditText(this)
-        cgKey.hint = "CoinGecko API Key"
-        cgKey.setText(storage.getCoinGeckoApiKey())
-
-        val save = Button(this)
-        save.text = "Save"
+        cg.setText(storage.getCoinGeckoApiKey())
 
         save.setOnClickListener {
 
@@ -45,18 +35,9 @@ class SettingsActivity : AppCompatActivity() {
             storage.setBinanceSecret(secret.text.toString())
             storage.setAddresses(addresses.text.toString())
             storage.setFakePrice(fake.text.toString())
-            storage.setCoinGeckoApiKey(cgKey.text.toString())
+            storage.setCoinGeckoApiKey(cg.text.toString())
 
             finish()
         }
-
-        layout.addView(key)
-        layout.addView(secret)
-        layout.addView(addresses)
-        layout.addView(fake)
-        layout.addView(cgKey)
-        layout.addView(save)
-
-        setContentView(layout)
     }
 }

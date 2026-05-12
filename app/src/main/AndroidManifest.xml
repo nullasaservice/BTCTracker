@@ -7,7 +7,8 @@
         android:label="BTCTracker"
         android:supportsRtl="true"
         android:icon="@mipmap/ic_launcher"
-        android:theme="@style/Theme.Material3.DayNight">
+        android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
+        >
 
         <activity
             android:name=".SettingsActivity"
