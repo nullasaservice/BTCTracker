@@ -39,32 +39,44 @@ class PortfolioRepository(private val storage: Storage) {
 
         val sb = StringBuilder()
 
-        sb.append("BTC USD: $usd\nBTC EUR: $eur\n\n")
+        sb.appendLine("###############")
+        sb.appendLine("Bitcoin prices:")
+        sb.appendLine("USD: $usd")
+        sb.appendLine("EUR: $eur")
+        sb.appendLine("###############")
+        sb.appendLine()
 
+        sb.appendLine("#################")
+        sb.appendLine("Wallet addresses:")
         for (a in addresses) {
-
+            sb.appendLine("////")
             val bal = BlockchainApi.getBalance(a)
-
             total += bal
-
-            sb.append("$a\n$bal BTC\n\n")
+            sb.appendLine("$a\n$bal BTC")
+            sb.appendLine("////")
         }
+        sb.appendLine("#################")
+        sb.appendLine()
 
+        sb.appendLine("################")
+        sb.appendLine("Binance balance:")
         val key = storage.getBinanceKey()
         val secret = storage.getBinanceSecret()
-
         if (key.isNotBlank() && secret.isNotBlank()) {
-
             val binance = BinanceApi.getBTC(key, secret)
-
             total += binance
-
-            sb.append("BINANCE: $binance BTC\n\n")
+            sb.appendLine("----- $binance BTC -----")
         }
+        sb.appendLine("################")
+        sb.appendLine()
 
-        sb.append("TOTAL: $total BTC\n")
-        sb.append("USD: ${total * usd}\n")
-        sb.append("EUR: ${total * eur}\n")
+        sb.appendLine("################")
+        sb.appendLine("Total:")
+        sb.appendLine("----- $total BTC -----")
+        sb.appendLine("----- ${String.format("%.2f", total * usd).replace(",", ".")} USD -----")
+        sb.appendLine("----- ${String.format("%.2f", total * eur).replace(",", ".")} EUR -----")
+        sb.appendLine("################")
+        sb.appendLine()
 
         return sb.toString()
     }
