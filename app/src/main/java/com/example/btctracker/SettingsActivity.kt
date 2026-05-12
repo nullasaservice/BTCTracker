@@ -1,39 +1,30 @@
 package com.example.btctracker
 
 import android.os.Bundle
-import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.example.btctracker.data.Storage
+import com.example.btctracker.ui.controller.SettingsScreenController
 
 class SettingsActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
-
         setContentView(R.layout.activity_settings)
 
         val storage = Storage(this)
 
-        val key = findViewById<EditText>(R.id.etBinanceKey)
-        val secret = findViewById<EditText>(R.id.etBinanceSecret)
-        val addresses = findViewById<EditText>(R.id.etAddresses)
-        val cg = findViewById<EditText>(R.id.etCgKey)
-
-        val save = findViewById<Button>(R.id.btnSave)
-
-        key.setText(storage.getBinanceKey())
-        secret.setText(storage.getBinanceSecret())
-        addresses.setText(storage.getAddresses())
-        cg.setText(storage.getCoinGeckoApiKey())
-
-        save.setOnClickListener {
-            storage.setBinanceKey(key.text.toString())
-            storage.setBinanceSecret(secret.text.toString())
-            storage.setAddresses(addresses.text.toString())
-            storage.setCoinGeckoApiKey(cg.text.toString())
-
+        val controller = SettingsScreenController(
+            storage,
+            findViewById(R.id.etBinanceKey),
+            findViewById(R.id.etBinanceSecret),
+            findViewById(R.id.etAddresses),
+            findViewById(R.id.etCgKey),
+            findViewById(R.id.btnSave)
+        ) {
             finish()
         }
+
+        controller.init()
     }
 }
