@@ -32,6 +32,11 @@
                 android:contentDescription="Settings"
                 android:src="@drawable/baseline_settings_24"
                 app:tint="@color/white" />
+
+            <Button
+                android:id="@+id/btnFakePrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
         </LinearLayout>
 
         <!-- CONTENT -->

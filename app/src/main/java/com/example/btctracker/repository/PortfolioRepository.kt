@@ -2,18 +2,16 @@ package com.example.btctracker.repository
 
 import com.example.btctracker.data.Storage
 import com.example.btctracker.network.*
+import com.example.btctracker.state.AppState
 
 class PortfolioRepository(private val storage: Storage) {
 
     suspend fun loadPortfolio(): String {
 
-        val fake = storage.getFakePrice()
+        val fakeUsd = AppState.fakePriceUsd
 
         val priceData =
-            if (fake.isNotBlank()) {
-
-                val fakeUsd = fake.toDouble()
-
+            if (fakeUsd != null) {
                 val realPrices =
                     PriceApi.fetchBTCPrice(storage.getCoinGeckoApiKey())
 
@@ -22,7 +20,6 @@ class PortfolioRepository(private val storage: Storage) {
                     btcEur = fakeUsd * realPrices.usdToEur,
                     usdToEur = realPrices.usdToEur
                 )
-
             } else {
                 PriceApi.fetchBTCPrice(storage.getCoinGeckoApiKey())
             }
@@ -38,6 +35,11 @@ class PortfolioRepository(private val storage: Storage) {
         var total = 0.0
 
         val sb = StringBuilder()
+
+        if (AppState.fakePriceUsd != null) {
+            sb.appendLine("⚠️ Fake price mode active ⚠️")
+            sb.appendLine()
+        }
 
         sb.appendLine("###############")
         sb.appendLine("Bitcoin prices:")

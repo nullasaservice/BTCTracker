@@ -46,17 +46,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
-            <!-- FAKE PRICE -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Fake BTC Price (USD)"/>
-
-            <EditText
-                android:id="@+id/etFakePrice"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-
             <!-- COINGECKO -->
             <TextView
                 android:layout_width="wrap_content"
