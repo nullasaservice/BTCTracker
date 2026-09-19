@@ -18,6 +18,8 @@ class SettingsActivity : AppCompatActivity() {
             storage,
             findViewById(R.id.etBinanceKey),
             findViewById(R.id.etBinanceSecret),
+            findViewById(R.id.etKrakenKey),
+            findViewById(R.id.etKrakenSecret),
             findViewById(R.id.etAddresses),
             findViewById(R.id.etCgKey),
             findViewById(R.id.btnSave)

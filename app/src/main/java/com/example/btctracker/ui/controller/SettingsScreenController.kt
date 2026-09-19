@@ -6,8 +6,10 @@ import com.example.btctracker.data.Storage
 
 class SettingsScreenController(
     private val storage: Storage,
-    private val key: EditText,
-    private val secret: EditText,
+    private val binanceKey: EditText,
+    private val binanceSecret: EditText,
+    private val krakenKey: EditText,
+    private val krakenSecret: EditText,
     private val addresses: EditText,
     private val cg: EditText,
     private val saveBtn: Button,
@@ -16,15 +18,19 @@ class SettingsScreenController(
 
     fun init() {
 
-        key.setText(storage.getBinanceKey())
-        secret.setText(storage.getBinanceSecret())
+        binanceKey.setText(storage.getBinanceKey())
+        binanceSecret.setText(storage.getBinanceSecret())
+        krakenKey.setText(storage.getKrakenKey())
+        krakenSecret.setText(storage.getKrakenSecret())
         addresses.setText(storage.getAddresses())
         cg.setText(storage.getCoinGeckoApiKey())
 
         saveBtn.setOnClickListener {
 
-            storage.setBinanceKey(key.text.toString())
-            storage.setBinanceSecret(secret.text.toString())
+            storage.setBinanceKey(binanceKey.text.toString())
+            storage.setBinanceSecret(binanceSecret.text.toString())
+            storage.setKrakenKey(krakenKey.text.toString())
+            storage.setKrakenSecret(krakenSecret.text.toString())
             storage.setAddresses(addresses.text.toString())
             storage.setCoinGeckoApiKey(cg.text.toString())
 

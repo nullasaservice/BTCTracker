@@ -62,12 +62,28 @@ class PortfolioRepository(private val storage: Storage) {
 
         sb.appendLine("################")
         sb.appendLine("Binance balance:")
-        val key = storage.getBinanceKey()
-        val secret = storage.getBinanceSecret()
-        if (key.isNotBlank() && secret.isNotBlank()) {
-            val binance = BinanceApi.getBTC(key, secret)
+        val binanceKey = storage.getBinanceKey()
+        val binanceSecret = storage.getBinanceSecret()
+        if (binanceKey.isBlank() || binanceSecret.isBlank()) {
+            sb.appendLine("🚨 Please add API keys to continue")
+        } else {
+            val binance = BinanceApi.getBTC(binanceKey, binanceSecret)
             total += binance
             sb.appendLine("----- $binance BTC -----")
+        }
+        sb.appendLine("################")
+        sb.appendLine()
+
+        sb.appendLine("################")
+        sb.appendLine("Kraken balance:")
+        val krakenKey = storage.getKrakenKey()
+        val krakenSecret = storage.getKrakenSecret()
+        if (krakenKey.isBlank() || krakenSecret.isBlank()) {
+            sb.appendLine("🚨 Please add API keys to continue")
+        } else {
+            val kraken = KrakenApi.getBTC(krakenKey, krakenSecret)
+            total += kraken
+            sb.appendLine("----- $kraken BTC -----")
         }
         sb.appendLine("################")
         sb.appendLine()

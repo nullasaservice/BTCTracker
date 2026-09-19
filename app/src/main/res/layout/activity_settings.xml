@@ -35,6 +35,28 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
+            <!-- KRAKEN KEY -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Kraken API Key"/>
+
+            <EditText
+                android:id="@+id/etKrakenKey"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <!-- KRAKEN SECRET -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Kraken Secret"/>
+
+            <EditText
+                android:id="@+id/etKrakenSecret"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
             <!-- ADDRESSES -->
             <TextView
                 android:layout_width="wrap_content"
